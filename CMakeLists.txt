@@ -12,7 +12,7 @@ endif()
 
 project(tcod-maze VERSION 0.0.0 LANGUAGES CXX)
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/maze.cpp)
 
 find_package(libtcod CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE libtcod::libtcod)
