@@ -1,3 +1,5 @@
+build/
+
 # Created by https://www.toptal.com/developers/gitignore/api/vcpkg,c++,cmake,c
 # Edit at https://www.toptal.com/developers/gitignore?templates=vcpkg,c++,cmake,c
 
