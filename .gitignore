@@ -1,4 +1,7 @@
+# CMake
 build/
+# Executable
+bin/
 
 # Created by https://www.toptal.com/developers/gitignore/api/vcpkg,c++,cmake,c
 # Edit at https://www.toptal.com/developers/gitignore?templates=vcpkg,c++,cmake,c
@@ -95,6 +98,8 @@ _deps
 
 ### vcpkg ###
 # Vcpkg
+
+vcpkg-manifest-install.log
 
 ## Manifest Mode
 vcpkg_installed/
