@@ -6,13 +6,15 @@ namespace TCODMaze {
 
 // --- Constants
 
-const int Maze::MIN_WIDTH = 6;
-const int Maze::MIN_HEIGHT = 6;
+const int Maze::MIN_WIDTH = 1;
+const int Maze::MIN_HEIGHT = 1;
 
 // --- Public ---
 
-Maze::Maze(int size) { this->construct(size, size); }
-Maze::Maze(int width, int height) { this->construct(width, height); }
+Maze::Maze(int size_cells) { this->construct(size_cells, size_cells); }
+Maze::Maze(int width_cells, int height_cells) {
+  this->construct(width_cells, height_cells);
+}
 
 int Maze::getWidth() { return this->width; }
 int Maze::getHeight() { return this->height; }
@@ -22,13 +24,20 @@ MazeTile Maze::getTile(int x, int y) { return (*(this->grid))[x][y]; }
 // --- Private ---
 
 // This function generates the actual maze
-void Maze::construct(int width, int height) {
+void Maze::construct(int width_cells, int height_cells) {
+  // Convert "cell size" to actual grid size
+  int width = width_cells * 2 - 1;
+  int height = height_cells * 2 - 1;
+
+  this->width = width;
+  this->height = height;
+
   // Make sure maze is wide enough
-  if (width < MIN_WIDTH)
+  if (width_cells < MIN_WIDTH)
     throw std::domain_error("Maze width too small: " + std::to_string(width) +
                             "<" + std::to_string(MIN_WIDTH));
   // Make sure maze is tall enough
-  if (width < MIN_WIDTH)
+  if (height_cells < MIN_HEIGHT)
     throw std::domain_error("Maze height too small: " + std::to_string(height) +
                             "<" + std::to_string(MIN_HEIGHT));
 
