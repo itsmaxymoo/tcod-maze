@@ -24,8 +24,8 @@ class Maze {
 
  public:
   static const int MIN_WIDTH, MIN_HEIGHT;
-  Maze(int size = 6);
-  Maze(int width = 6, int height = 6);
+  Maze(int size = MIN_HEIGHT);
+  Maze(int width = MIN_WIDTH, int height = MIN_HEIGHT);
   int getWidth();
   int getHeight();
   MazeTile getTile(int x, int y);
