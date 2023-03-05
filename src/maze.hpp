@@ -12,7 +12,7 @@ This file defines a Maze/Maze Generator class.
 
 namespace TCODMaze {
 
-enum MazeTile { FLOOR = '.', WALL = '#', START = 'S', FINISH = 'F' };
+enum MazeTile { FLOOR = ' ', WALL = '#', START = 'S', FINISH = 'F' };
 
 class Maze {
  private:
@@ -24,7 +24,6 @@ class Maze {
 
  public:
   static const int MIN_WIDTH, MIN_HEIGHT;
-  Maze(int size_cells = MIN_HEIGHT);
   Maze(int width_cells = MIN_WIDTH, int height_cells = MIN_HEIGHT);
   int getWidth();
   int getHeight();

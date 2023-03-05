@@ -11,7 +11,6 @@ const int Maze::MIN_HEIGHT = 1;
 
 // --- Public ---
 
-Maze::Maze(int size_cells) { this->construct(size_cells, size_cells); }
 Maze::Maze(int width_cells, int height_cells) {
   this->construct(width_cells, height_cells);
 }
@@ -40,17 +39,19 @@ void Maze::construct(int width_cells, int height_cells) {
 
   // Make sure maze is wide enough
   if (width_cells < MIN_WIDTH)
-    throw std::domain_error("Maze width too small: " + std::to_string(width) +
-                            "<" + std::to_string(MIN_WIDTH));
+    throw std::domain_error(
+        "Maze width too small: " + std::to_string(width_cells) + "<" +
+        std::to_string(MIN_WIDTH));
   // Make sure maze is tall enough
   if (height_cells < MIN_HEIGHT)
-    throw std::domain_error("Maze height too small: " + std::to_string(height) +
-                            "<" + std::to_string(MIN_HEIGHT));
+    throw std::domain_error(
+        "Maze height too small: " + std::to_string(height_cells) + "<" +
+        std::to_string(MIN_HEIGHT));
 
   // Create grid vector (yikes)
   this->grid = std::make_unique<std::vector<std::vector<MazeTile>>>(
       std::vector<std::vector<MazeTile>>(
-          height, std::vector<MazeTile>(width, MazeTile::WALL)));
+          width, std::vector<MazeTile>(height, MazeTile::WALL)));
 
   // TODO: Generate the actual maze
 }
