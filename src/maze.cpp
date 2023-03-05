@@ -18,6 +18,8 @@ Maze::Maze(int width_cells, int height_cells) {
 int Maze::getWidth() { return this->width; }
 int Maze::getHeight() { return this->height; }
 
+MazeTile Maze::getTile(Vector2i pos) { return this->getTile(pos.x, pos.y); }
+
 MazeTile Maze::getTile(int x, int y) {
   // Check bounds
   if (x < 0 || x >= this->width || y < 0 || y >= this->height)
@@ -31,11 +33,8 @@ MazeTile Maze::getTile(int x, int y) {
 // This function generates the actual maze
 void Maze::construct(int width_cells, int height_cells) {
   // Convert "cell size" to actual grid size
-  int width = width_cells * 2 + 1;
-  int height = height_cells * 2 + 1;
-
-  this->width = width;
-  this->height = height;
+  this->width = width_cells * 2 + 1;
+  this->height = height_cells * 2 + 1;
 
   // Make sure maze is wide enough
   if (width_cells < MIN_WIDTH)
@@ -51,9 +50,13 @@ void Maze::construct(int width_cells, int height_cells) {
   // Create grid vector (yikes)
   this->grid = std::make_unique<std::vector<std::vector<MazeTile>>>(
       std::vector<std::vector<MazeTile>>(
-          width, std::vector<MazeTile>(height, MazeTile::WALL)));
+          this->width, std::vector<MazeTile>(this->height, MazeTile::WALL)));
 
   // TODO: Generate the actual maze
+}
+
+void Maze::setTile(Vector2i pos, MazeTile tile) {
+  this->setTile(pos.x, pos.y, tile);
 }
 
 void Maze::setTile(int x, int y, MazeTile tile) {

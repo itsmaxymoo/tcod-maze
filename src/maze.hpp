@@ -10,6 +10,8 @@ This file defines a Maze/Maze Generator class.
 #include <memory>
 #include <vector>
 
+#include "vector2i.hpp"
+
 namespace TCODMaze {
 
 enum MazeTile { FLOOR = ' ', WALL = '#', START = 'S', FINISH = 'F' };
@@ -20,6 +22,7 @@ class Maze {
   int height;
   std::unique_ptr<std::vector<std::vector<MazeTile>>> grid;
   void construct(int width, int height);
+  void setTile(Vector2i, MazeTile);
   void setTile(int x, int y, MazeTile);
 
  public:
@@ -27,6 +30,7 @@ class Maze {
   Maze(int width_cells = MIN_WIDTH, int height_cells = MIN_HEIGHT);
   int getWidth();
   int getHeight();
+  MazeTile getTile(Vector2i);
   MazeTile getTile(int x, int y);
 };
 
