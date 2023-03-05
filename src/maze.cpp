@@ -19,7 +19,13 @@ Maze::Maze(int width_cells, int height_cells) {
 int Maze::getWidth() { return this->width; }
 int Maze::getHeight() { return this->height; }
 
-MazeTile Maze::getTile(int x, int y) { return (*(this->grid))[x][y]; }
+MazeTile Maze::getTile(int x, int y) {
+  // Check bounds
+  if (x < 0 || x >= this->width || y < 0 || y >= this->height)
+    throw std::domain_error("Out of bounds maze cell access");
+
+  return (*(this->grid))[x][y];
+}
 
 // --- Private ---
 
