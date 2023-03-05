@@ -10,11 +10,15 @@ endif()
 
 # --------------------------------------------
 
+# Project Info
 project(tcod-maze VERSION 0.0.0 LANGUAGES CXX)
 
+# Project files
 add_executable(${PROJECT_NAME} src/main.cpp src/maze.cpp)
 
+# Dependencies
 find_package(libtcod CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE libtcod::libtcod)
 
+# Build settings
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
