@@ -31,8 +31,8 @@ MazeTile Maze::getTile(int x, int y) {
 // This function generates the actual maze
 void Maze::construct(int width_cells, int height_cells) {
   // Convert "cell size" to actual grid size
-  int width = width_cells * 2 - 1;
-  int height = height_cells * 2 - 1;
+  int width = width_cells * 2 + 1;
+  int height = height_cells * 2 + 1;
 
   this->width = width;
   this->height = height;
