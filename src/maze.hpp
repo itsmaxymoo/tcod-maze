@@ -12,7 +12,7 @@ This file defines a Maze/Maze Generator class.
 
 namespace TCODMaze {
 
-enum MazeTile { FLOOR, WALL, START, FINISH };
+enum MazeTile { FLOOR = ' ', WALL = '#', START = 'S', FINISH = 'F' };
 
 class Maze {
  private:
