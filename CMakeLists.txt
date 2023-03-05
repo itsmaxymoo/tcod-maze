@@ -22,3 +22,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE libtcod::libtcod)
 
 # Build settings
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
+if(NOT MSVC)
+	target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
+endif()
