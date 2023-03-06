@@ -10,7 +10,7 @@ const int Maze::MIN_WIDTH = 1;
 const int Maze::MIN_HEIGHT = 1;
 
 // --- RNG
-std::mt19937 Maze::rng(time(NULL));
+std::mt19937 Maze::rng(0);
 
 // --- Public ---
 
@@ -65,15 +65,15 @@ void Maze::construct(int width_cells, int height_cells) {
   setTile(spos, MazeTile::FLOOR);
   {
     // Add walls to array
-    auto cell_walls = this->getNeighbors(spos);
-    walls.insert(walls.end(), cell_walls.begin(), cell_walls.end());
+    walls = this->getNeighbors(spos);
   }
 
   // Begin regular algorithm
   while (!walls.empty()) {
     // Get random wall
-    std::uniform_int_distribution<int> allWallsRange(0, walls.size());
-    Vector2i selectedWall = walls[allWallsRange(Maze::rng)];
+    std::uniform_int_distribution<int> allWallsRange(0, walls.size() - 1);
+    int selectedWallIndex = allWallsRange(Maze::rng);
+    Vector2i selectedWall = walls[selectedWallIndex];
 
     // Get wall's neighbors (cells)
     std::vector<Vector2i> neighboringCells = this->getNeighbors(selectedWall);
@@ -91,12 +91,29 @@ void Maze::construct(int width_cells, int height_cells) {
     }
 
     // If there is only one visited neighbor
-    if(visitedNeighbors == 1){
-      //
+    if (visitedNeighbors == 1) {
+      // Find coords of opposing cell
+      Vector2i opposingCell = selectedWall + (selectedWall - visitedNeighbor);
+
+      try {
+        // Mark opposing cell
+        this->setTile(opposingCell, MazeTile::FLOOR);
+        // Mark this wall as floor
+        this->setTile(selectedWall, MazeTile::FLOOR);
+
+        // Add opposing cell's walls to the list
+        for (Vector2i opposingCellNeighborWall :
+             this->getNeighbors(opposingCell))
+          if (this->getTile(opposingCellNeighborWall) == MazeTile::WALL)
+            walls.push_back(opposingCellNeighborWall);
+      } catch (std::domain_error &e) {
+        // This wall must have been a border cell. Ignore.
+      }
     }
 
     // Remove this wall from the walls list
-    // TODO: Find out how to remove item from vector
+    std::swap(walls[selectedWallIndex], walls[walls.size() - 1]);
+    walls.pop_back();
   }
 }
 
@@ -105,6 +122,7 @@ void Maze::setTile(const Vector2i &pos, MazeTile tile) {
 }
 
 void Maze::setTile(int x, int y, MazeTile tile) {
+  this->getTile(x, y);
   (*(this->grid))[x][y] = tile;
 }
 
