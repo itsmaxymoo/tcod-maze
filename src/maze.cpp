@@ -1,5 +1,6 @@
 #include "maze.hpp"
 
+#include <ctime>
 #include <stdexcept>
 
 namespace TCODMaze {
@@ -7,6 +8,9 @@ namespace TCODMaze {
 // --- Constants
 const int Maze::MIN_WIDTH = 1;
 const int Maze::MIN_HEIGHT = 1;
+
+// --- RNG
+std::mt19937 Maze::rng(time(NULL));
 
 // --- Public ---
 
@@ -66,8 +70,33 @@ void Maze::construct(int width_cells, int height_cells) {
   }
 
   // Begin regular algorithm
-  while (walls.size() > 0) {
-    // Pick random wall.
+  while (!walls.empty()) {
+    // Get random wall
+    std::uniform_int_distribution<int> allWallsRange(0, walls.size());
+    Vector2i selectedWall = walls[allWallsRange(Maze::rng)];
+
+    // Get wall's neighbors (cells)
+    std::vector<Vector2i> neighboringCells = this->getNeighbors(selectedWall);
+
+    // Count visited neighbors
+    int visitedNeighbors = 0;
+    Vector2i visitedNeighbor;
+    for (Vector2i neighboringCell : neighboringCells) {
+      if (this->getTile(neighboringCell) == MazeTile::FLOOR) {
+        visitedNeighbors++;
+
+        visitedNeighbor.x = neighboringCell.x;
+        visitedNeighbor.y = neighboringCell.y;
+      }
+    }
+
+    // If there is only one visited neighbor
+    if(visitedNeighbors == 1){
+      //
+    }
+
+    // Remove this wall from the walls list
+    // TODO: Find out how to remove item from vector
   }
 }
 

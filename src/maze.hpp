@@ -9,6 +9,7 @@ This file defines a Maze/Maze Generator class.
 
 #include <memory>
 #include <vector>
+#include <random>
 
 #include "vector2i.hpp"
 
@@ -18,6 +19,7 @@ enum MazeTile { FLOOR = ' ', WALL = '#', START = 'S', FINISH = 'F' };
 
 class Maze {
  private:
+  static std::mt19937 rng;
   int width;
   int height;
   std::unique_ptr<std::vector<std::vector<MazeTile>>> grid;
