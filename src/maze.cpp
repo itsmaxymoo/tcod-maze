@@ -5,7 +5,6 @@
 namespace TCODMaze {
 
 // --- Constants
-
 const int Maze::MIN_WIDTH = 1;
 const int Maze::MIN_HEIGHT = 1;
 
@@ -18,7 +17,9 @@ Maze::Maze(int width_cells, int height_cells) {
 int Maze::getWidth() { return this->width; }
 int Maze::getHeight() { return this->height; }
 
-MazeTile Maze::getTile(Vector2i pos) { return this->getTile(pos.x, pos.y); }
+MazeTile Maze::getTile(const Vector2i &pos) {
+  return this->getTile(pos.x, pos.y);
+}
 
 MazeTile Maze::getTile(int x, int y) {
   // Check bounds
@@ -52,15 +53,51 @@ void Maze::construct(int width_cells, int height_cells) {
       std::vector<std::vector<MazeTile>>(
           this->width, std::vector<MazeTile>(this->height, MazeTile::WALL)));
 
-  // TODO: Generate the actual maze
+  // --- Generate the actual maze
+  Vector2i spos(1, 1);
+  std::vector<Vector2i> walls;
+
+  // Mark the first cell
+  setTile(spos, MazeTile::FLOOR);
+  {
+    // Add walls to array
+    auto cell_walls = this->getNeighbors(spos);
+    walls.insert(walls.end(), cell_walls.begin(), cell_walls.end());
+  }
+
+  // Begin regular algorithm
+  while (walls.size() > 0) {
+    // Pick random wall.
+  }
 }
 
-void Maze::setTile(Vector2i pos, MazeTile tile) {
+void Maze::setTile(const Vector2i &pos, MazeTile tile) {
   this->setTile(pos.x, pos.y, tile);
 }
 
 void Maze::setTile(int x, int y, MazeTile tile) {
   (*(this->grid))[x][y] = tile;
+}
+
+// Function to get the FOUR neighboring cells of a cell. If they are out of
+// bounds, they are ignored.
+std::vector<Vector2i> Maze::getNeighbors(Vector2i &pos) {
+  const Vector2i DIRECTIONS[] = {Vector2i(0, 1), Vector2i(1, 0),
+                                 Vector2i(0, -1), Vector2i(-1, 0)};
+
+  std::vector<Vector2i> neighbors;
+
+  for (Vector2i direction : DIRECTIONS) {
+    Vector2i neighbor = pos + direction;
+    try {
+      getTile(neighbor);
+      neighbors.push_back(neighbor);
+    } catch (std::domain_error &e) {
+      // ignore error; this neighbor doesn't exist
+    }
+  }
+
+  return neighbors;
 }
 
 }  // namespace TCODMaze

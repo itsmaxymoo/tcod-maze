@@ -22,15 +22,16 @@ class Maze {
   int height;
   std::unique_ptr<std::vector<std::vector<MazeTile>>> grid;
   void construct(int width, int height);
-  void setTile(Vector2i, MazeTile);
+  void setTile(const Vector2i&, MazeTile);
   void setTile(int x, int y, MazeTile);
+  std::vector<Vector2i> getNeighbors(Vector2i&);
 
  public:
   static const int MIN_WIDTH, MIN_HEIGHT;
   Maze(int width_cells = MIN_WIDTH, int height_cells = MIN_HEIGHT);
   int getWidth();
   int getHeight();
-  MazeTile getTile(Vector2i);
+  MazeTile getTile(const Vector2i&);
   MazeTile getTile(int x, int y);
 };
 
