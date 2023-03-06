@@ -1,5 +1,5 @@
 #!/bin/bash
-cmake -S . -B build
+cmake -DCMAKE_BUILD_TYPE=Debug -S . -B build
 cd build
 make
 cd ..
