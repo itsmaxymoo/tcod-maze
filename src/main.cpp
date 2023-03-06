@@ -3,7 +3,7 @@
 #include "maze.hpp"
 
 int main() {
-  TCODMaze::Maze test_maze(1, 1);
+  TCODMaze::Maze test_maze(10, 10);
 
   for (int y = 0; y < test_maze.getHeight(); y++) {
     for (int x = 0; x < test_maze.getWidth(); x++) {

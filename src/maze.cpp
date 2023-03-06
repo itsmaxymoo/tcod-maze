@@ -10,7 +10,7 @@ const int Maze::MIN_WIDTH = 1;
 const int Maze::MIN_HEIGHT = 1;
 
 // --- RNG
-std::mt19937 Maze::rng(0);
+std::mt19937 Maze::rng(time(NULL));
 
 // --- Public ---
 
@@ -115,6 +115,12 @@ void Maze::construct(int width_cells, int height_cells) {
     std::swap(walls[selectedWallIndex], walls[walls.size() - 1]);
     walls.pop_back();
   }
+
+  // --- End Prim's
+
+  // Set the start and end points
+  this->setTile(0, 1, MazeTile::START);
+  this->setTile(this->width - 1, this->height - 2, MazeTile::FINISH);
 }
 
 void Maze::setTile(const Vector2i &pos, MazeTile tile) {
