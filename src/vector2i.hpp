@@ -18,6 +18,7 @@ class Vector2i {
   Vector2i operator+(const Vector2i &that);
   Vector2i operator-(const Vector2i &that);
   Vector2i operator*(int);
+  Vector2i &operator=(const Vector2i &that);
 };
 
 }  // namespace TCODMaze
