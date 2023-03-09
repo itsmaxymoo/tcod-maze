@@ -14,7 +14,7 @@ endif()
 project(tcod-maze VERSION 0.0.0 LANGUAGES CXX)
 
 # Project files
-add_executable(${PROJECT_NAME} src/main.cpp src/maze.cpp src/vector2i.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/maze.cpp src/vector2i.cpp src/gameobject.cpp src/action.hpp)
 
 # Dependencies
 find_package(libtcod CONFIG REQUIRED)
