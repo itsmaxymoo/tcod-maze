@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "maze.hpp"
+#include "engine/maze.hpp"
 
 int main() {
   TCODMaze::Maze test_maze(10, 10);
