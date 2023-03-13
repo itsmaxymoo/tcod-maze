@@ -9,8 +9,6 @@ This file holds classes related to Game Objects.
 
 #include <string>
 
-#include "action.hpp"
-
 namespace TCODMaze{
 
 // A static "Game Object" - Shows up on the map and not much else.

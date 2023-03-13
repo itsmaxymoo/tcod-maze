@@ -9,8 +9,11 @@ This file holds classes related to Actions.
 
 namespace TCODMaze {
 
+// Forward-declares
+class Actor;
+
 class Action {
-  // stub class
+  virtual void execute(Actor&);
 };
 
 }  // namespace TCODMaze
