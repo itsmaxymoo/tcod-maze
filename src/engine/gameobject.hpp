@@ -7,12 +7,11 @@ This file holds classes related to Game Objects.
 #ifndef TCOD_MAZE_GAME_OBJECT
 #define TCOD_MAZE_GAME_OBJECT
 
-#include <memory>
 #include <string>
 
 #include "action.hpp"
 
-namespace TCODMaze {
+namespace TCODMaze{
 
 // A static "Game Object" - Shows up on the map and not much else.
 class GameObject {
@@ -39,26 +38,6 @@ class GameObject {
   void setCollide(bool);
   void setOpaque(bool);
 };
-
-// An actor is generally something player or AI controlled
-class Actor : public GameObject {
- private:
-  float energy = 100.f;
-  float energyPenalty = 1.f;
-  std::shared_ptr<Action> nextAction;
-
- public:
-  static const float ENERGY_THRESHOLD;
-
-  float getEnergy();
-  float getEnergyPenalty();
-  std::shared_ptr<Action> getNextAction();
-
-  void setEnergy(float);
-  void setEnergyPenalty(float);
-  void setNextAction(std::shared_ptr<Action>);
-};
-
 }  // namespace TCODMaze
 
 #endif
