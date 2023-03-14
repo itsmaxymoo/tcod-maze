@@ -11,6 +11,7 @@ This file holds classes related to Actors.
 
 #include "action.hpp"
 #include "gameobject.hpp"
+#include "vector2i.hpp"
 
 namespace TCODMaze {
 
@@ -23,6 +24,8 @@ class Actor : public GameObject {
 
  public:
   static const float ENERGY_THRESHOLD;
+
+  Vector2i position;
 
   float getEnergy();
   float getEnergyPenalty();
