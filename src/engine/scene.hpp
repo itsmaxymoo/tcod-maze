@@ -11,7 +11,7 @@ This class represent a local area
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <vector>
+#include <list>
 
 #include "actor.hpp"
 #include "gameobject.hpp"
@@ -24,13 +24,13 @@ class Scene {
   std::string name = "";
   std::shared_ptr<GameObject> defaultGameObject;
   std::unordered_map<Vector2i, std::shared_ptr<GameObject>> staticMap;
-  std::shared_ptr<std::vector<std::shared_ptr<Actor>>> actors;
+  std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
 
  public:
   // Getters
   const std::string getName();
   const std::shared_ptr<GameObject> getDefaultGameObject();
-  std::vector<Actor> getActors();
+  std::shared_ptr<std::list<std::shared_ptr<Actor>>> getActors();
   std::shared_ptr<GameObject> getCell(Vector2i);
 
   // Setters

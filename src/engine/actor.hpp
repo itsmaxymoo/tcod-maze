@@ -15,24 +15,23 @@ This file holds classes related to Actors.
 
 namespace TCODMaze {
 
+// Forward-declares
+class Scene;
+
 // An actor is generally something player or AI controlled
 class Actor : public GameObject {
  private:
-  float energy = 100.f;
-  float energyPenalty = 1.f;
   std::shared_ptr<Action> nextAction;
+  std::shared_ptr<Scene> scene;
 
  public:
   static const float ENERGY_THRESHOLD;
 
-  Vector2i position;
+  Actor(Scene&, Vector2i = Vector2i(0, 0));
 
-  float getEnergy();
-  float getEnergyPenalty();
+  Vector2i position;
   std::shared_ptr<Action> getNextAction();
 
-  void setEnergy(float);
-  void setEnergyPenalty(float);
   void setNextAction(std::shared_ptr<Action>);
 };
 

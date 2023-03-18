@@ -13,7 +13,7 @@ namespace TCODMaze {
 class Actor;
 
 class Action {
-  virtual void execute(Actor&);
+  virtual void execute(Actor&, Scene&);
 };
 
 }  // namespace TCODMaze
