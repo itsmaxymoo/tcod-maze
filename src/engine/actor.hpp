@@ -22,12 +22,12 @@ class Scene;
 class Actor : public GameObject {
  private:
   std::shared_ptr<Action> nextAction;
-  std::shared_ptr<Scene> scene;
+  std::weak_ptr<Scene> scene;
 
  public:
   static const float ENERGY_THRESHOLD;
 
-  Actor(Scene&, Vector2i = Vector2i(0, 0));
+  Actor(std::weak_ptr<Scene>, Vector2i = Vector2i(0, 0));
 
   Vector2i position;
   std::shared_ptr<Action> getNextAction();

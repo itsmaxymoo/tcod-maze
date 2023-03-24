@@ -11,6 +11,7 @@ namespace TCODMaze {
 
 // Forward-declares
 class Actor;
+class Scene;
 
 class Action {
   virtual void execute(Actor&, Scene&);

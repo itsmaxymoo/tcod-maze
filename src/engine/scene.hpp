@@ -36,6 +36,9 @@ class Scene {
   // Setters
   void setName(std::string);
   void setDefaultGameObject(std::shared_ptr<GameObject>);
+
+  // Other
+  std::weak_ptr<Actor> createActor(Vector2i = Vector2i(0, 0));
 };
 
 }  // namespace TCODMaze

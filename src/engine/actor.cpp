@@ -13,8 +13,8 @@ namespace TCODMaze {
 const float Actor::ENERGY_THRESHOLD = 100.f;
 
 // Constructor
-Actor::Actor(Scene& scene, Vector2i position) {
-  scene.getActors()->push_front(&this);
+Actor::Actor(std::weak_ptr<Scene>, Vector2i position) {
+  this->scene = scene;
   this->position = position;
 }
 
