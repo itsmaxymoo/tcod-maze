@@ -21,7 +21,7 @@ class FrontEnd {
 class TCODAsciiFrontEnd : public FrontEnd {
  public:
   void run(Engine&);
-}
+};
 
 }  // namespace TCODMaze
 

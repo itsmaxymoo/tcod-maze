@@ -8,8 +8,8 @@ Frontend Implementation
 
 namespace TCODMaze {
 
-TCODAsciiFrontEnd::run(Engine &engine) {
-  //
-}
+void FrontEnd::run(Engine &engine) { return; }
+
+void TCODAsciiFrontEnd::run(Engine &engine) { return; }
 
 }  // namespace TCODMaze
