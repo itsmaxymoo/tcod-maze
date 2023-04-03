@@ -1,15 +1,13 @@
 #include <iostream>
 
-#include "engine/maze.hpp"
+#include "engine/engine.hpp"
+#include "frontend.hpp"
 
 int main() {
-  TCODMaze::Maze test_maze(10, 10);
+  TCODMaze::Engine engine;
+  TCODMaze::TCODAsciiFrontEnd frontend;
 
-  for (int y = 0; y < test_maze.getHeight(); y++) {
-    for (int x = 0; x < test_maze.getWidth(); x++) {
-      std::cout << (char)test_maze.getTile(x, y);
-    }
+  frontend.run(engine);
 
-    std::cout << "\n";
-  }
+  return 0;
 }
