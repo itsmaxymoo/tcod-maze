@@ -17,8 +17,8 @@ project(tcod-maze VERSION 0.0.0 LANGUAGES CXX)
 add_executable(${PROJECT_NAME} src/main.cpp src/engine/maze.cpp src/engine/vector2i.cpp src/engine/gameobject.cpp src/engine/actor.cpp src/engine/action.cpp src/engine/scene.cpp src/engine/engine.cpp src/frontend.cpp)
 
 # Dependencies
-find_package(libtcod CONFIG REQUIRED)
 find_package(SDL2 CONFIG REQUIRED)
+find_package(libtcod CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main libtcod::libtcod)
 
 # Build settings
