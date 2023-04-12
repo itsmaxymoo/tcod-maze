@@ -23,7 +23,7 @@ class Scene {
  private:
   std::string name = "";
   std::shared_ptr<GameObject> defaultGameObject;
-  std::unordered_map<Vector2i, std::shared_ptr<GameObject>> staticMap;
+  std::unordered_map<Vector2i, std::shared_ptr<GameObject>, Vector2iHash> staticMap;
   std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
 
  public:

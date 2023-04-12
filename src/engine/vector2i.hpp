@@ -9,8 +9,7 @@ This file defines a Vector2D object
 
 namespace TCODMaze {
 
-class Vector2i {
- public:
+struct Vector2i {
   int x = 0, y = 0;
   Vector2i();
   Vector2i(int x, int y);
@@ -19,6 +18,12 @@ class Vector2i {
   Vector2i operator-(const Vector2i &that);
   Vector2i operator*(int);
   Vector2i &operator=(const Vector2i &that);
+};
+
+struct Vector2iHash {
+  size_t operator()(const Vector2i &t) const {
+    return hash<int>()(t.x) ^ hash<int>()(t.y);
+  }
 };
 
 }  // namespace TCODMaze
