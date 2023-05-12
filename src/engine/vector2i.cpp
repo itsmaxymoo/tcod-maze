@@ -9,12 +9,8 @@ Vector2i::Vector2i(int x, int y) {
   this->y = y;
 }
 
-bool Vector2i::operator==(const Vector2i &that) {
+bool Vector2i::operator==(const Vector2i &that) const {
   return this->x == that.x && this->y == that.y;
-}
-
-Vector2i Vector2i::operator+(const Vector2i &that) {
-  return Vector2i(this->x + that.x, this->y + that.y);
 }
 
 Vector2i Vector2i::operator-(const Vector2i &that) {

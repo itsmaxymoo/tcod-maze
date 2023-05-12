@@ -13,7 +13,7 @@ struct Vector2i {
   int x = 0, y = 0;
   Vector2i();
   Vector2i(int x, int y);
-  bool operator==(const Vector2i &that);
+  bool operator==(const Vector2i &that) const;
   Vector2i operator+(const Vector2i &that);
   Vector2i operator-(const Vector2i &that);
   Vector2i operator*(int);
@@ -21,8 +21,8 @@ struct Vector2i {
 };
 
 struct Vector2iHash {
-  size_t operator()(const Vector2i &t) const {
-    return hash<int>()(t.x) ^ hash<int>()(t.y);
+  int operator()(const Vector2i &t) const {
+    return 0;
   }
 };
 
