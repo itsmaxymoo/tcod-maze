@@ -7,6 +7,8 @@ This file defines a Vector2D object
 #ifndef TCOD_MAZE_VECTOR2
 #define TCOD_MAZE_VECTOR2
 
+#include <functional>
+
 namespace TCODMaze {
 
 struct Vector2i {
@@ -22,7 +24,7 @@ struct Vector2i {
 
 struct Vector2iHash {
   int operator()(const Vector2i &t) const {
-    return 0;
+    return std::hash<int>()(t.x) ^ std::hash<int>()(t.y);
   }
 };
 
