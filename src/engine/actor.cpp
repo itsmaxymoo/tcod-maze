@@ -6,14 +6,12 @@ TCODMaze::Actor
 
 #include "actor.hpp"
 
-#include "scene.hpp"
-
 namespace TCODMaze {
 // Constants
 const float Actor::ENERGY_THRESHOLD = 100.f;
 
 // Constructor
-Actor::Actor(std::weak_ptr<Scene>, Vector2i position) {
+Actor::Actor(Scene *scene, Vector2i position) {
   this->scene = scene;
   this->position = position;
 }

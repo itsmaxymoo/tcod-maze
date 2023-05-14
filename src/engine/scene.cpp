@@ -25,12 +25,12 @@ std::shared_ptr<GameObject> Scene::getCell(Vector2i pos) {
 void Scene::setName(std::string name) { this->name = name; }
 
 void Scene::setDefaultGameObject(
-    std::shared_ptr<GameObject> defaultGameObject) {
+  std::shared_ptr<GameObject> defaultGameObject) {
   this->defaultGameObject = defaultGameObject;
 }
 
 std::weak_ptr<Actor> Scene::createActor(Vector2i pos) {
-  auto actor = std::make_shared<Actor>(pos);
+  auto actor = std::shared_ptr<Actor>(new Actor(this, pos));
   actors->push_back(actor);
   return std::weak_ptr<Actor>(actor);
 }
