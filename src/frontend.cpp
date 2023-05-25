@@ -58,24 +58,28 @@ int TCODAsciiFrontEnd::run(Engine *engine) {
   g_context = tcod::Context(params);
 
   while (true) {
+    if (engine->update() == PRE) continue;
+
     // --- Rendering.
     g_console.clear();
 
     // Calculate centering offset
-    const int OFFSET = WINDOW_SIZE / 2 - engine->getMazeSize() / 2;
+    const int OFFSET = WINDOW_SIZE / 2 - engine->getMazeSize() / 2 + 1;
 
     // Render map
-    for(int i = 0; i < engine->maze.getWidth(); ++i){
-      for(int j = 0; j < engine->maze.getHeight(); ++j){
-        tcod::print(g_console, {(i + OFFSET), (j + OFFSET)}, std::string(1, (char)(engine->maze.getTile(i, j))),
-                TCOD_ColorRGB{255, 255, 255}, std::nullopt);
+    for (int i = 0; i < engine->maze.getWidth(); ++i) {
+      for (int j = 0; j < engine->maze.getHeight(); ++j) {
+        tcod::print(g_console, {(i + OFFSET), (j + OFFSET)},
+                    std::string(1, (char)(engine->maze.getTile(i, j))),
+                    TCOD_ColorRGB{200, 200, 200}, std::nullopt);
       }
     }
 
     // Render player
-    tcod::print(g_console, {(engine->player.x + OFFSET), (engine->player.y + OFFSET)}, "@",
+    tcod::print(g_console,
+                {(engine->player.x + OFFSET), (engine->player.y + OFFSET)}, "@",
                 TCOD_ColorRGB{255, 255, 255}, std::nullopt);
-    
+
     // flush
     g_context.present(g_console);
 
