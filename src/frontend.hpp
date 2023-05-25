@@ -16,7 +16,6 @@ namespace TCODMaze {
 class FrontEnd {
  public:
   virtual int run(Engine*);
-
 };
 
 class TCODAsciiFrontEnd : public FrontEnd {

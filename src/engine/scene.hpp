@@ -11,10 +11,10 @@ This class represent a local area
 #include <memory>
 #include <string>
 #include <unordered_map>
-#include <list>
 
 #include "actor.hpp"
 #include "gameobject.hpp"
+#include "maze.hpp"
 #include "vector2i.hpp"
 
 namespace TCODMaze {
@@ -22,20 +22,20 @@ namespace TCODMaze {
 class Scene {
  private:
   std::string name = "";
-  std::shared_ptr<GameObject> defaultGameObject;
-  std::unordered_map<Vector2i, std::shared_ptr<GameObject>, Vector2iHash> staticMap;
+  MazeTile defaultMazeTile;
+  std::unordered_map<Vector2i, MazeTile, Vector2iHash> staticMap;
   std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
 
  public:
   // Getters
   const std::string getName();
-  const std::shared_ptr<GameObject> getDefaultGameObject();
+  const MazeTile getDefaultMazeTile();
   std::shared_ptr<std::list<std::shared_ptr<Actor>>> getActors();
-  std::shared_ptr<GameObject> getCell(Vector2i);
+  MazeTile getCell(Vector2i);
 
   // Setters
   void setName(std::string);
-  void setDefaultGameObject(std::shared_ptr<GameObject>);
+  void setDefaultMazeTile(MazeTile);
 
   // Other
   std::weak_ptr<Actor> createActor(Vector2i = Vector2i(0, 0));

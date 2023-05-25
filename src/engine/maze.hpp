@@ -8,14 +8,20 @@ This file defines a Maze/Maze Generator class.
 #define TCOD_MAZE_MAZE
 
 #include <memory>
-#include <vector>
 #include <random>
+#include <vector>
 
 #include "vector2i.hpp"
 
 namespace TCODMaze {
 
-enum MazeTile { FLOOR = ' ', WALL = '#', START = 'S', FINISH = 'F' };
+enum MazeTile {
+  FLOOR = ' ',
+  WALL = '#',
+  START = 'S',
+  FINISH = 'F',
+  VOID = ' '
+};
 
 class Maze {
  private:

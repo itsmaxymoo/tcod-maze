@@ -10,23 +10,24 @@ namespace TCODMaze {
 
 const std::string Scene::getName() { return name; }
 
-const std::shared_ptr<GameObject> Scene::getDefaultGameObject() {
-  return defaultGameObject;
-}
+const MazeTile Scene::getDefaultMazeTile() { return defaultMazeTile; }
 
 std::shared_ptr<std::list<std::shared_ptr<Actor>>> Scene::getActors() {
   return actors;
 }
 
-std::shared_ptr<GameObject> Scene::getCell(Vector2i pos) {
-  return staticMap[pos];
+MazeTile Scene::getCell(Vector2i pos) {
+  if (this->staticMap.find(pos) == this->staticMap.end()) {
+    return this->getDefaultMazeTile();
+  } else {
+    return staticMap[pos];
+  }
 }
 
 void Scene::setName(std::string name) { this->name = name; }
 
-void Scene::setDefaultGameObject(
-  std::shared_ptr<GameObject> defaultGameObject) {
-  this->defaultGameObject = defaultGameObject;
+void Scene::setDefaultMazeTile(MazeTile defaultMazeTile) {
+  this->defaultMazeTile = defaultMazeTile;
 }
 
 std::weak_ptr<Actor> Scene::createActor(Vector2i pos) {
