@@ -22,7 +22,7 @@ namespace TCODMaze {
 
     public:
         std::shared_ptr<Scene> scene;
-        std::weak_ptr<Actor> player;
+        Actor *player;
 
         GameState update();
     };

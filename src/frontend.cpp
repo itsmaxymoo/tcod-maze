@@ -15,7 +15,7 @@ Frontend Implementation
 
 namespace TCODMaze {
 
-int FrontEnd::run(Engine &engine) { return 1; }
+int FrontEnd::run(Engine *engine) { return 1; }
 
 // --- TCOD Frontend
 
@@ -37,7 +37,7 @@ auto get_data_dir() -> std::filesystem::path {
 static tcod::Console g_console;  // The global console object.
 static tcod::Context g_context;  // The global libtcod context.
 
-int TCODAsciiFrontEnd::run(Engine &engine) {
+int TCODAsciiFrontEnd::run(Engine *engine) {
   // Setup TCOD
   auto params = TCOD_ContextParams{};
   params.tcod_version = TCOD_COMPILEDVERSION;
@@ -50,15 +50,20 @@ int TCODAsciiFrontEnd::run(Engine &engine) {
                                       {32, 8}, tcod::CHARMAP_TCOD);
   params.tileset = tileset.get();
 
-  g_console = tcod::Console{80, 40};
+  g_console = tcod::Console{40, 40};
   params.console = g_console.get();
 
   g_context = tcod::Context(params);
 
   while (true) {
-    // Rendering.
+    // --- Rendering.
     g_console.clear();
-    tcod::print(g_console, {0, 0}, "Hello World", TCOD_ColorRGB{255, 255, 255}, std::nullopt);
+
+    // Render player
+    tcod::print(g_console,
+                {(engine->player->position.x),
+                 (engine->player->position.x)},
+                "@", TCOD_ColorRGB{255, 255, 255}, std::nullopt);
     g_context.present(g_console);
 
     // Handle input.

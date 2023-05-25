@@ -7,7 +7,7 @@ int main() {
   TCODMaze::Engine engine;
   TCODMaze::TCODAsciiFrontEnd frontend;
 
-  frontend.run(engine);
+  frontend.run(&engine);
 
   return 0;
 }
