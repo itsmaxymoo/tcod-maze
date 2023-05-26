@@ -10,11 +10,12 @@ This file holds classes related to Actions.
 namespace TCODMaze {
 
 // Forward-declares
-class Actor;
-class Scene;
+class actor;
+class scene;
 
 class Action {
-  virtual void execute(Actor&, Scene&);
+ public:
+  virtual void execute(actor*);
 };
 
 }  // namespace TCODMaze

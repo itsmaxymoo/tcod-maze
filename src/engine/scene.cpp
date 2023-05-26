@@ -16,10 +16,10 @@ tile_t scene::get_cell(Vector2i pos) {
   }
 }
 
-std::shared_ptr<Actor> scene::create_actor(Vector2i pos) {
-  auto actor = std::shared_ptr<Actor>(new Actor(this, pos));
-  actors->push_back(actor);
-  return actor;
+std::shared_ptr<actor> scene::create_actor(Vector2i pos) {
+  auto new_actor = std::shared_ptr<actor>(new actor(this, pos));
+  actors->push_back(new_actor);
+  return new_actor;
 }
 
 }  // namespace TCODMaze

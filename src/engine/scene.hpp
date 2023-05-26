@@ -27,13 +27,13 @@ class scene {
  public:
   std::string name = "";
   tile_t default_tile;
-  std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
+  std::shared_ptr<std::list<std::shared_ptr<actor>>> actors;
 
   // Getters
   tile_t get_cell(Vector2i);
 
   // Factory
-  std::shared_ptr<Actor> create_actor(Vector2i = Vector2i(0, 0));
+  std::shared_ptr<actor> create_actor(Vector2i = Vector2i(0, 0));
 };
 
 }  // namespace TCODMaze

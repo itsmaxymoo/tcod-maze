@@ -1,24 +1,24 @@
 /*
 
-TCODMaze::Actor
+TCODMaze::actor
 
 */
 
 #include "actor.hpp"
 
 namespace TCODMaze {
-// Constants
-const float Actor::ENERGY_THRESHOLD = 100.f;
 
 // Constructor
-Actor::Actor(scene *this_scene, Vector2i position) {
-  this->this_scene = this_scene;
+actor::actor(scene* parent_scene, Vector2i position) {
+  this->parent_scene = parent_scene;
   this->position = position;
 }
 
-// Getters
-std::shared_ptr<Action> Actor::getNextAction() { return this->nextAction; }
+scene* actor::get_parent_scene() const { return this->parent_scene; }
 
-// Setters
-void Actor::setNextAction(std::shared_ptr<Action> x) { this->nextAction = x; }
+void actor::set_next_action(std::shared_ptr<Action> x) {
+  this->next_action = x;
+}
+
+void actor::execute_action() { this->next_action.get()->execute(this); }
 }  // namespace TCODMaze

@@ -1,16 +1,17 @@
 /*
 
-This file holds classes related to Actors.
+This file holds classes related to actors.
 
 */
 
-#ifndef TCOD_MAZE_ACTOR
-#define TCOD_MAZE_ACTOR
+#ifndef TCOD_MAZE_actor
+#define TCOD_MAZE_actor
 
 #include <memory>
 
 #include "action.hpp"
 #include "gameobject.hpp"
+#include "tile.hpp"
 #include "vector2i.hpp"
 
 namespace TCODMaze {
@@ -19,20 +20,20 @@ namespace TCODMaze {
 class scene;
 
 // An actor is generally something player or AI controlled
-class Actor : public GameObject {
+class actor : public tile_t {
  private:
-  std::shared_ptr<Action> nextAction;
-  scene *this_scene;
+  std::shared_ptr<Action> next_action;
+  scene *parent_scene;
 
  public:
-  static const float ENERGY_THRESHOLD;
-
-  Actor(scene *, Vector2i = Vector2i(0, 0));
+  actor(scene *, Vector2i = Vector2i(0, 0));
 
   Vector2i position;
-  std::shared_ptr<Action> getNextAction();
 
-  void setNextAction(std::shared_ptr<Action>);
+  scene *get_parent_scene() const;
+
+  void set_next_action(std::shared_ptr<Action>);
+  void execute_action();
 };
 
 }  // namespace TCODMaze
