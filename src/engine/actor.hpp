@@ -10,7 +10,6 @@ This file holds classes related to actors.
 #include <memory>
 
 #include "action.hpp"
-#include "gameobject.hpp"
 #include "tile.hpp"
 #include "vector2i.hpp"
 

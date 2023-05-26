@@ -13,7 +13,6 @@ This class represent a local area
 #include <unordered_map>
 
 #include "actor.hpp"
-#include "gameobject.hpp"
 #include "maze.hpp"
 #include "tile.hpp"
 #include "vector2i.hpp"
