@@ -15,6 +15,7 @@ This class represent a local area
 #include "actor.hpp"
 #include "maze.hpp"
 #include "tile.hpp"
+#include "tile.hpp"
 #include "vector2i.hpp"
 
 namespace TCODMaze {
@@ -30,6 +31,9 @@ class scene {
 
   // Getters
   tile_t get_cell(vector2i);
+
+  // Setters
+  void set_cell(vector2i, tile_t);
 
   // Factory
   std::shared_ptr<actor> create_actor(vector2i = vector2i(0, 0));
