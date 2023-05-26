@@ -24,10 +24,7 @@ struct vector2i {
 };
 
 struct vector2i_hash {
-  int operator()(const vector2i &t) const {
-    int64_t xl = (int64_t)t.x + INT32_MAX, yl = (int64_t)t.y + INT32_MAX;
-    return std::hash<int>()(xl) ^ std::hash<int>()(yl);
-  }
+  int operator()(const vector2i &t) const;
 };
 
 }  // namespace TCODMaze

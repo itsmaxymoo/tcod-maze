@@ -32,4 +32,8 @@ vector2i &vector2i::operator=(const vector2i &that) {
   return *this;
 }
 
+int vector2i_hash::operator()(const vector2i &t) const {
+  return std::hash<int>()(t.x) ^ std::hash<int>()(t.y);
+}
+
 }  // namespace TCODMaze
