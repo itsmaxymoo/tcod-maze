@@ -1,10 +1,10 @@
 /*
 
-Frontend Implementation
+TCOD Frontend Implementation
 
 */
 
-#include "frontend.hpp"
+#include "tcod_frontend.hpp"
 
 #include <SDL.h>
 
@@ -14,10 +14,6 @@ Frontend Implementation
 #include <libtcod.hpp>
 
 #define WINDOW_SIZE 41
-
-namespace TCODMaze {
-
-int FrontEnd::run(Engine *engine) { return 1; }
 
 // --- TCOD Frontend
 
@@ -39,7 +35,7 @@ auto get_data_dir() -> std::filesystem::path {
 static tcod::Console g_console;  // The global console object.
 static tcod::Context g_context;  // The global libtcod context.
 
-int TCODAsciiFrontEnd::run(Engine *engine) {
+int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
   // Setup TCOD
   auto params = TCOD_ContextParams{};
   params.tcod_version = TCOD_COMPILEDVERSION;
@@ -58,7 +54,7 @@ int TCODAsciiFrontEnd::run(Engine *engine) {
   g_context = tcod::Context(params);
 
   while (true) {
-    if (engine->update() == PRE) continue;
+    if (engine->update() == TCODMaze::GameState::PRE) continue;
 
     // --- Rendering.
     g_console.clear();
@@ -96,5 +92,3 @@ int TCODAsciiFrontEnd::run(Engine *engine) {
 
   return 0;
 }
-
-}  // namespace TCODMaze

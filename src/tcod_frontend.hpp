@@ -10,19 +10,11 @@ This file/class houses the "front end" code
 #include <memory>
 
 #include "engine/engine.hpp"
+#include "engine/frontend.hpp"
 
-namespace TCODMaze {
-
-class FrontEnd {
+class TCODAsciiFrontEnd : public TCODMaze::FrontEnd {
  public:
-  virtual int run(Engine*);
+  int run(TCODMaze::Engine*);
 };
-
-class TCODAsciiFrontEnd : public FrontEnd {
- public:
-  int run(Engine*);
-};
-
-}  // namespace TCODMaze
 
 #endif

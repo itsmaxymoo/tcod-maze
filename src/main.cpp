@@ -1,11 +1,11 @@
 #include <iostream>
 
 #include "engine/engine.hpp"
-#include "frontend.hpp"
+#include "tcod_frontend.hpp"
 
 int main() {
   TCODMaze::Engine engine;
-  TCODMaze::TCODAsciiFrontEnd frontend;
+  TCODAsciiFrontEnd frontend;
 
   frontend.run(&engine);
 

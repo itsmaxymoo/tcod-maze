@@ -14,7 +14,7 @@ endif()
 project(tcod-maze VERSION 0.0.0 LANGUAGES CXX)
 
 # Project files
-add_executable(${PROJECT_NAME} src/main.cpp src/engine/maze.cpp src/engine/vector2i.cpp src/engine/gameobject.cpp src/engine/actor.cpp src/engine/action.cpp src/engine/scene.cpp src/engine/engine.cpp src/frontend.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/engine/maze.cpp src/engine/vector2i.cpp src/engine/gameobject.cpp src/engine/actor.cpp src/engine/action.cpp src/engine/scene.cpp src/engine/engine.cpp src/engine/frontend.cpp src/tcod_frontend.cpp)
 
 # Dependencies
 find_package(SDL2 CONFIG REQUIRED)
