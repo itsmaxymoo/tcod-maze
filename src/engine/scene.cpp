@@ -1,6 +1,6 @@
 /*
 
-TCODMaze::Scene
+TCODMaze::scene
 
 */
 
@@ -8,32 +8,32 @@ TCODMaze::Scene
 
 namespace TCODMaze {
 
-const std::string Scene::getName() { return name; }
+const std::string scene::get_name() { return name; }
 
-const MazeTile Scene::getDefaultMazeTile() { return defaultMazeTile; }
+const tile_t scene::get_default_tile() { return default_tile; }
 
-std::shared_ptr<std::list<std::shared_ptr<Actor>>> Scene::getActors() {
+std::shared_ptr<std::list<std::shared_ptr<Actor>>> scene::get_actors() {
   return actors;
 }
 
-MazeTile Scene::getCell(Vector2i pos) {
-  if (this->staticMap.find(pos) == this->staticMap.end()) {
-    return this->getDefaultMazeTile();
+tile_t scene::get_cell(Vector2i pos) {
+  if (this->static_map.find(pos) == this->static_map.end()) {
+    return this->get_default_tile();
   } else {
-    return staticMap[pos];
+    return static_map[pos];
   }
 }
 
-void Scene::setName(std::string name) { this->name = name; }
+void scene::set_name(std::string name) { this->name = name; }
 
-void Scene::setDefaultMazeTile(MazeTile defaultMazeTile) {
-  this->defaultMazeTile = defaultMazeTile;
+void scene::set_default_tile(tile_t default_tile) {
+  this->default_tile = default_tile;
 }
 
-std::weak_ptr<Actor> Scene::createActor(Vector2i pos) {
+std::shared_ptr<Actor> scene::create_actor(Vector2i pos) {
   auto actor = std::shared_ptr<Actor>(new Actor(this, pos));
   actors->push_back(actor);
-  return std::weak_ptr<Actor>(actor);
+  return actor;
 }
 
 }  // namespace TCODMaze

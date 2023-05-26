@@ -14,7 +14,7 @@ int Engine::getMazeSize() const { return this->mazeSize * 2 + 1; }
 
 GameState Engine::update() {
   if (this->state == PRE) {
-    this->maze = Maze(this->mazeSize, this->mazeSize);
+    this->gen_maze = maze(this->mazeSize, this->mazeSize);
     this->player = Vector2i(0, 1);
     ++(this->mazeSize);
     this->state = MAIN;

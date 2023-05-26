@@ -11,36 +11,37 @@ This file defines a Maze/Maze Generator class.
 #include <random>
 #include <vector>
 
+#include "tile.hpp"
 #include "vector2i.hpp"
 
 namespace TCODMaze {
 
-enum MazeTile {
-  FLOOR = ' ',
-  WALL = '#',
-  START = 'S',
-  FINISH = 'F',
-  VOID = ' '
+class TILES {
+ public:
+  static tile_t FLOOR;
+  static tile_t WALL;
+  static tile_t START;
+  static tile_t FINISH;
 };
 
-class Maze {
+class maze {
  private:
   static std::mt19937 rng;
   int width;
   int height;
-  std::unique_ptr<std::vector<std::vector<MazeTile>>> grid;
+  std::unique_ptr<std::vector<std::vector<tile_t>>> grid;
   void construct(int width, int height);
-  void setTile(const Vector2i&, MazeTile);
-  void setTile(int x, int y, MazeTile);
-  std::vector<Vector2i> getNeighbors(Vector2i&);
+  void set_tile(const Vector2i&, tile_t);
+  void set_tile(int x, int y, tile_t);
+  std::vector<Vector2i> get_neighbors(Vector2i&);
 
  public:
   static const int MIN_WIDTH, MIN_HEIGHT;
-  Maze(int width_cells = MIN_WIDTH, int height_cells = MIN_HEIGHT);
-  int getWidth();
-  int getHeight();
-  MazeTile getTile(const Vector2i&);
-  MazeTile getTile(int x, int y);
+  maze(int width_cells = MIN_WIDTH, int height_cells = MIN_HEIGHT);
+  int get_width();
+  int get_height();
+  tile_t get_tile(const Vector2i&) const;
+  tile_t get_tile(int x, int y) const;
 };
 
 }  // namespace TCODMaze

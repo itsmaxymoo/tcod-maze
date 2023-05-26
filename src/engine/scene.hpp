@@ -15,30 +15,31 @@ This class represent a local area
 #include "actor.hpp"
 #include "gameobject.hpp"
 #include "maze.hpp"
+#include "tile.hpp"
 #include "vector2i.hpp"
 
 namespace TCODMaze {
 
-class Scene {
+class scene {
  private:
   std::string name = "";
-  MazeTile defaultMazeTile;
-  std::unordered_map<Vector2i, MazeTile, Vector2iHash> staticMap;
+  tile_t default_tile;
+  std::unordered_map<Vector2i, tile_t, Vector2iHash> static_map;
   std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
 
  public:
   // Getters
-  const std::string getName();
-  const MazeTile getDefaultMazeTile();
-  std::shared_ptr<std::list<std::shared_ptr<Actor>>> getActors();
-  MazeTile getCell(Vector2i);
+  const std::string get_name();
+  const tile_t get_default_tile();
+  std::shared_ptr<std::list<std::shared_ptr<Actor>>> get_actors();
+  tile_t get_cell(Vector2i);
 
   // Setters
-  void setName(std::string);
-  void setDefaultMazeTile(MazeTile);
+  void set_name(std::string);
+  void set_default_tile(tile_t);
 
   // Other
-  std::weak_ptr<Actor> createActor(Vector2i = Vector2i(0, 0));
+  std::shared_ptr<Actor> create_actor(Vector2i = Vector2i(0, 0));
 };
 
 }  // namespace TCODMaze

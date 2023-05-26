@@ -11,8 +11,8 @@ namespace TCODMaze {
 const float Actor::ENERGY_THRESHOLD = 100.f;
 
 // Constructor
-Actor::Actor(Scene *scene, Vector2i position) {
-  this->scene = scene;
+Actor::Actor(scene *this_scene, Vector2i position) {
+  this->this_scene = this_scene;
   this->position = position;
 }
 

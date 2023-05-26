@@ -63,11 +63,15 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
     const int OFFSET = WINDOW_SIZE / 2 - engine->getMazeSize() / 2 + 1;
 
     // Render map
-    for (int i = 0; i < engine->maze.getWidth(); ++i) {
-      for (int j = 0; j < engine->maze.getHeight(); ++j) {
-        tcod::print(g_console, {(i + OFFSET), (j + OFFSET)},
-                    std::string(1, (char)(engine->maze.getTile(i, j))),
-                    TCOD_ColorRGB{200, 200, 200}, std::nullopt);
+    for (int i = 0; i < engine->gen_maze.get_width(); ++i) {
+      for (int j = 0; j < engine->gen_maze.get_height(); ++j) {
+        auto this_tile = engine->gen_maze.get_tile(i, j);
+        tcod::print(
+            g_console, {(i + OFFSET), (j + OFFSET)},
+            std::string(1, (char)(this_tile.ascii)),
+            TCOD_ColorRGB{this_tile.ascii_color.r, this_tile.ascii_color.g,
+                          this_tile.ascii_color.b},
+            std::nullopt);
       }
     }
 

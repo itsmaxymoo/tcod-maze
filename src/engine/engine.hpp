@@ -22,7 +22,7 @@ class Engine {
   int mazeSize = 3;
 
  public:
-  Maze maze;
+  maze gen_maze;
   Vector2i player;
 
   int getMazeSize() const;
