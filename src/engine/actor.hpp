@@ -25,9 +25,9 @@ class actor : public tile_t {
   scene *parent_scene;
 
  public:
-  actor(scene *, Vector2i = Vector2i(0, 0));
+  actor(scene *, vector2i = vector2i(0, 0));
 
-  Vector2i position;
+  vector2i position;
 
   scene *get_parent_scene() const;
 

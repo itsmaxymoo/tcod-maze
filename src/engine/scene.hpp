@@ -21,7 +21,7 @@ namespace TCODMaze {
 
 class scene {
  private:
-  std::unordered_map<Vector2i, tile_t, Vector2iHash> static_map;
+  std::unordered_map<vector2i, tile_t, vector2i_hash> static_map;
 
  public:
   std::string name = "";
@@ -29,10 +29,10 @@ class scene {
   std::shared_ptr<std::list<std::shared_ptr<actor>>> actors;
 
   // Getters
-  tile_t get_cell(Vector2i);
+  tile_t get_cell(vector2i);
 
   // Factory
-  std::shared_ptr<actor> create_actor(Vector2i = Vector2i(0, 0));
+  std::shared_ptr<actor> create_actor(vector2i = vector2i(0, 0));
 };
 
 }  // namespace TCODMaze

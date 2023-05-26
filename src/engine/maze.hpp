@@ -31,16 +31,16 @@ class maze {
   int height;
   std::unique_ptr<std::vector<std::vector<tile_t>>> grid;
   void construct(int width, int height);
-  void set_tile(const Vector2i&, tile_t);
+  void set_tile(const vector2i&, tile_t);
   void set_tile(int x, int y, tile_t);
-  std::vector<Vector2i> get_neighbors(Vector2i&);
+  std::vector<vector2i> get_neighbors(vector2i&);
 
  public:
   static const int MIN_WIDTH, MIN_HEIGHT;
   maze(int width_cells = MIN_WIDTH, int height_cells = MIN_HEIGHT);
   int get_width();
   int get_height();
-  tile_t get_tile(const Vector2i&) const;
+  tile_t get_tile(const vector2i&) const;
   tile_t get_tile(int x, int y) const;
 };
 

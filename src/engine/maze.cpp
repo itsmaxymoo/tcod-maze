@@ -27,7 +27,7 @@ maze::maze(int width_cells, int height_cells) {
 int maze::get_width() { return this->width; }
 int maze::get_height() { return this->height; }
 
-tile_t maze::get_tile(const Vector2i &pos) const {
+tile_t maze::get_tile(const vector2i &pos) const {
   return this->get_tile(pos.x, pos.y);
 }
 
@@ -64,8 +64,8 @@ void maze::construct(int width_cells, int height_cells) {
           this->width, std::vector<tile_t>(this->height, TILES::WALL)));
 
   // --- Generate the actual maze
-  Vector2i spos(1, 1);
-  std::vector<Vector2i> walls;
+  vector2i spos(1, 1);
+  std::vector<vector2i> walls;
 
   // Mark the first cell
   set_tile(spos, TILES::FLOOR);
@@ -79,15 +79,15 @@ void maze::construct(int width_cells, int height_cells) {
     // Get random wall
     std::uniform_int_distribution<int> allWallsRange(0, walls.size() - 1);
     int selectedWallIndex = allWallsRange(maze::rng);
-    Vector2i selectedWall = walls[selectedWallIndex];
+    vector2i selectedWall = walls[selectedWallIndex];
 
     // Get wall's neighbors (cells)
-    std::vector<Vector2i> neighboringCells = this->get_neighbors(selectedWall);
+    std::vector<vector2i> neighboringCells = this->get_neighbors(selectedWall);
 
     // Count visited neighbors
     int visitedNeighbors = 0;
-    Vector2i visitedNeighbor;
-    for (Vector2i neighboringCell : neighboringCells) {
+    vector2i visitedNeighbor;
+    for (vector2i neighboringCell : neighboringCells) {
       if (this->get_tile(neighboringCell) == TILES::FLOOR) {
         visitedNeighbors++;
 
@@ -99,7 +99,7 @@ void maze::construct(int width_cells, int height_cells) {
     // If there is only one visited neighbor
     if (visitedNeighbors == 1) {
       // Find coords of opposing cell
-      Vector2i opposingCell = selectedWall + (selectedWall - visitedNeighbor);
+      vector2i opposingCell = selectedWall + (selectedWall - visitedNeighbor);
 
       try {
         // Mark opposing cell
@@ -108,7 +108,7 @@ void maze::construct(int width_cells, int height_cells) {
         this->set_tile(selectedWall, TILES::FLOOR);
 
         // Add opposing cell's walls to the list
-        for (Vector2i opposingCellNeighborWall :
+        for (vector2i opposingCellNeighborWall :
              this->get_neighbors(opposingCell))
           if (this->get_tile(opposingCellNeighborWall) == TILES::WALL)
             walls.push_back(opposingCellNeighborWall);
@@ -129,7 +129,7 @@ void maze::construct(int width_cells, int height_cells) {
   this->set_tile(this->width - 1, this->height - 2, TILES::FINISH);
 }
 
-void maze::set_tile(const Vector2i &pos, tile_t tile) {
+void maze::set_tile(const vector2i &pos, tile_t tile) {
   this->set_tile(pos.x, pos.y, tile);
 }
 
@@ -140,14 +140,14 @@ void maze::set_tile(int x, int y, tile_t tile) {
 
 // Function to get the FOUR neighboring cells of a cell. If they are out of
 // bounds, they are ignored.
-std::vector<Vector2i> maze::get_neighbors(Vector2i &pos) {
-  const Vector2i DIRECTIONS[] = {Vector2i(0, 1), Vector2i(1, 0),
-                                 Vector2i(0, -1), Vector2i(-1, 0)};
+std::vector<vector2i> maze::get_neighbors(vector2i &pos) {
+  const vector2i DIRECTIONS[] = {vector2i(0, 1), vector2i(1, 0),
+                                 vector2i(0, -1), vector2i(-1, 0)};
 
-  std::vector<Vector2i> neighbors;
+  std::vector<vector2i> neighbors;
 
-  for (Vector2i direction : DIRECTIONS) {
-    Vector2i neighbor = pos + direction;
+  for (vector2i direction : DIRECTIONS) {
+    vector2i neighbor = pos + direction;
     try {
       get_tile(neighbor);
       neighbors.push_back(neighbor);

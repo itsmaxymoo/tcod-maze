@@ -9,7 +9,7 @@ TCODMaze::actor
 namespace TCODMaze {
 
 // Constructor
-actor::actor(scene* parent_scene, Vector2i position) {
+actor::actor(scene* parent_scene, vector2i position) {
   this->parent_scene = parent_scene;
   this->position = position;
 }
