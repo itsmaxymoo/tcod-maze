@@ -22,23 +22,17 @@ namespace TCODMaze {
 
 class scene {
  private:
-  std::string name = "";
-  tile_t default_tile;
   std::unordered_map<Vector2i, tile_t, Vector2iHash> static_map;
-  std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
 
  public:
+  std::string name = "";
+  tile_t default_tile;
+  std::shared_ptr<std::list<std::shared_ptr<Actor>>> actors;
+
   // Getters
-  const std::string get_name();
-  const tile_t get_default_tile();
-  std::shared_ptr<std::list<std::shared_ptr<Actor>>> get_actors();
   tile_t get_cell(Vector2i);
 
-  // Setters
-  void set_name(std::string);
-  void set_default_tile(tile_t);
-
-  // Other
+  // Factory
   std::shared_ptr<Actor> create_actor(Vector2i = Vector2i(0, 0));
 };
 
