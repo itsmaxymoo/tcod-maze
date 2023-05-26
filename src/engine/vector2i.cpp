@@ -4,7 +4,7 @@
 
 namespace TCODMaze {
 vector2i::vector2i() {}
-vector2i::vector2i(int x, int y) {
+vector2i::vector2i(int32_t x, int32_t y) {
   this->x = x;
   this->y = y;
 }

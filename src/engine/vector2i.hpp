@@ -15,7 +15,7 @@ namespace TCODMaze {
 struct vector2i {
   int32_t x = 0, y = 0;
   vector2i();
-  vector2i(uint32_t x, uint32_t y);
+  vector2i(int32_t x, int32_t y);
   bool operator==(const vector2i &that) const;
   vector2i operator+(const vector2i &that);
   vector2i operator-(const vector2i &that);
