@@ -67,7 +67,8 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
     // Render map
     for (int i = 0; i < engine->getMazeSize(); ++i) {
       for (int j = 0; j < engine->getMazeSize(); ++j) {
-        auto this_tile = engine->active_scene->get_cell(TCODMaze::vector2i(i, j));
+        auto this_tile =
+            engine->active_scene->get_cell(TCODMaze::vector2i(i, j));
         tcod::print(
             g_console, {(i + OFFSET), (j + OFFSET)},
             std::string(1, (char)(this_tile.ascii)),
@@ -79,8 +80,9 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
 
     // Render player
     tcod::print(g_console,
-                {(engine->player.x + OFFSET), (engine->player.y + OFFSET)}, "@",
-                TCOD_ColorRGB{255, 255, 255}, std::nullopt);
+                {(engine->active_player->position.x + OFFSET),
+                 (engine->active_player->position.y + OFFSET)},
+                "@", TCOD_ColorRGB{255, 255, 255}, std::nullopt);
 
     // flush
     g_context.present(g_console);

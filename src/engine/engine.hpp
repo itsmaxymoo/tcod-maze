@@ -23,7 +23,7 @@ class Engine {
 
  public:
   std::shared_ptr<scene> active_scene;
-  vector2i player;
+  std::shared_ptr<actor> active_player;
 
   int getMazeSize() const;
 

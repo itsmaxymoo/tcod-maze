@@ -7,6 +7,8 @@ TCODMaze::Engine
 #include "engine.hpp"
 
 #include "maze.hpp"
+#include "scene.hpp"
+#include "vector2i.hpp"
 
 namespace TCODMaze {
 
@@ -16,7 +18,7 @@ GameState Engine::update() {
   if (this->state == SETUP) {
     maze maze_gen(this->mazeSize, this->mazeSize);
     this->active_scene = maze_gen.get_scene();
-    this->player = vector2i(0, 1);
+    this->active_player = this->active_scene->create_actor(vector2i(0, 1));
     ++(this->mazeSize);
     this->state = LOOP;
   }
