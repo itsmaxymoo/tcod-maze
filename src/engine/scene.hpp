@@ -27,7 +27,7 @@ class scene {
  public:
   std::string name = "";
   tile_t default_tile;
-  std::shared_ptr<std::list<std::shared_ptr<actor>>> actors;
+  std::list<std::shared_ptr<actor>> actors;
 
   // Getters
   tile_t get_cell(vector2i);

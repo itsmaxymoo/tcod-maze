@@ -21,8 +21,8 @@ void scene::set_cell(vector2i pos, tile_t tile) {
 }
 
 std::shared_ptr<actor> scene::create_actor(vector2i pos) {
-  auto new_actor = std::make_shared<actor>(this, pos);
-  actors->push_back(new_actor);
+  auto new_actor = std::make_shared<actor>(actor(this, pos));
+  actors.push_back(new_actor);
   return new_actor;
 }
 
