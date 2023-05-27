@@ -1,6 +1,6 @@
 /*
 
-TCODMaze::Action
+TCODMaze::action
 
 */
 
@@ -8,6 +8,6 @@ TCODMaze::Action
 
 namespace TCODMaze {
 
-void Action::execute(actor* actor) { return; }
+void action::execute(actor* actor) { return; }
 
 }  // namespace TCODMaze

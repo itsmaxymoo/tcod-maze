@@ -21,7 +21,7 @@ class scene;
 // An actor is generally something player or AI controlled
 class actor : public tile_t {
  private:
-  std::shared_ptr<Action> next_action;
+  std::shared_ptr<action> next_action;
   scene *parent_scene;
 
  public:
@@ -31,7 +31,7 @@ class actor : public tile_t {
 
   scene *get_parent_scene() const;
 
-  void set_next_action(std::shared_ptr<Action>);
+  void set_next_action(std::shared_ptr<action>);
   void execute_action();
 };
 

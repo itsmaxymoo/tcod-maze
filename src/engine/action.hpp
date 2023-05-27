@@ -1,6 +1,6 @@
 /*
 
-This file holds classes related to Actions.
+This file holds classes related to actions.
 
 */
 
@@ -13,7 +13,7 @@ namespace TCODMaze {
 class actor;
 class scene;
 
-class Action {
+class action {
  public:
   virtual void execute(actor*);
 };
