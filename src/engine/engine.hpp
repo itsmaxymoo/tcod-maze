@@ -14,15 +14,15 @@ This class defines the main game loop.
 
 namespace TCODMaze {
 
-enum GameState { PRE, MAIN, LOSE };
+enum GameState { SETUP, LOOP, END };
 
 class Engine {
  private:
-  GameState state = PRE;
+  GameState state = SETUP;
   int mazeSize = 3;
 
  public:
-  maze gen_maze;
+  std::shared_ptr<scene> active_scene;
   vector2i player;
 
   int getMazeSize() const;

@@ -13,11 +13,12 @@ namespace TCODMaze {
 int Engine::getMazeSize() const { return this->mazeSize * 2 + 1; }
 
 GameState Engine::update() {
-  if (this->state == PRE) {
-    this->gen_maze = maze(this->mazeSize, this->mazeSize);
+  if (this->state == SETUP) {
+    maze maze_gen(this->mazeSize, this->mazeSize);
+    this->active_scene = maze_gen.get_scene();
     this->player = vector2i(0, 1);
     ++(this->mazeSize);
-    this->state = MAIN;
+    this->state = LOOP;
   }
 
   return state;

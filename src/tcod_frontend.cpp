@@ -13,6 +13,8 @@ TCOD Frontend Implementation
 #include <iostream>
 #include <libtcod.hpp>
 
+#include "engine/vector2i.hpp"
+
 #define WINDOW_SIZE 41
 
 // --- TCOD Frontend
@@ -54,7 +56,7 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
   g_context = tcod::Context(params);
 
   while (true) {
-    if (engine->update() == TCODMaze::GameState::PRE) continue;
+    if (engine->update() == TCODMaze::GameState::SETUP) continue;
 
     // --- Rendering.
     g_console.clear();
@@ -63,9 +65,9 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
     const int OFFSET = WINDOW_SIZE / 2 - engine->getMazeSize() / 2 + 1;
 
     // Render map
-    for (int i = 0; i < engine->gen_maze.get_width(); ++i) {
-      for (int j = 0; j < engine->gen_maze.get_height(); ++j) {
-        auto this_tile = engine->gen_maze.get_tile(i, j);
+    for (int i = 0; i < engine->getMazeSize(); ++i) {
+      for (int j = 0; j < engine->getMazeSize(); ++j) {
+        auto this_tile = engine->active_scene->get_cell(TCODMaze::vector2i(i, j));
         tcod::print(
             g_console, {(i + OFFSET), (j + OFFSET)},
             std::string(1, (char)(this_tile.ascii)),

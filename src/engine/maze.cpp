@@ -37,8 +37,10 @@ tile_t maze::get_tile(int x, int y) const {
   if (x < 0 || x >= this->width || y < 0 || y >= this->height)
     throw std::domain_error("Out of bounds maze cell access");
 
-  return (*(this->grid))[x][y];
+  return this->grid->get_cell(vector2i(x, y));
 }
+
+std::shared_ptr<scene> maze::get_scene() const { return this->grid; }
 
 // --- Private ---
 
@@ -59,10 +61,12 @@ void maze::construct(int width_cells, int height_cells) {
         "maze height too small: " + std::to_string(height_cells) + "<" +
         std::to_string(MIN_HEIGHT));
 
-  // Create grid vector (yikes)
-  this->grid = std::make_unique<std::vector<std::vector<tile_t>>>(
-      std::vector<std::vector<tile_t>>(
-          this->width, std::vector<tile_t>(this->height, TILES::WALL)));
+  // Create grid scene
+  this->grid = std::make_shared<scene>();
+  this->grid->default_tile = TILES::VOID;
+  for (int i = 0; i < this->width; ++i)
+    for (int j = 0; j < this->height; ++j)
+      this->grid->set_cell(vector2i(i, j), TILES::WALL);
 
   // --- Generate the actual maze
   vector2i spos(1, 1);
@@ -136,7 +140,7 @@ void maze::set_tile(const vector2i &pos, tile_t tile) {
 
 void maze::set_tile(int x, int y, tile_t tile) {
   this->get_tile(x, y);
-  (*(this->grid))[x][y] = tile;
+  this->grid->set_cell(vector2i(x, y), tile);
 }
 
 // Function to get the FOUR neighboring cells of a cell. If they are out of

@@ -12,6 +12,7 @@ This file defines a Maze/Maze Generator class.
 #include <vector>
 
 #include "tile.hpp"
+#include "scene.hpp"
 #include "vector2i.hpp"
 
 namespace TCODMaze {
@@ -30,7 +31,7 @@ class maze {
   static std::mt19937 rng;
   int width;
   int height;
-  std::unique_ptr<std::vector<std::vector<tile_t>>> grid;
+  std::shared_ptr<scene> grid;
   void construct(int width, int height);
   void set_tile(const vector2i&, tile_t);
   void set_tile(int x, int y, tile_t);
@@ -43,6 +44,7 @@ class maze {
   int get_height();
   tile_t get_tile(const vector2i&) const;
   tile_t get_tile(int x, int y) const;
+  std::shared_ptr<scene> get_scene() const;
 };
 
 }  // namespace TCODMaze
