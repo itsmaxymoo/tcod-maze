@@ -22,6 +22,7 @@ class TILES {
   static tile_t WALL;
   static tile_t START;
   static tile_t FINISH;
+  static tile_t VOID;
 };
 
 class maze {

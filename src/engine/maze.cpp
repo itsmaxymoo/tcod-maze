@@ -8,8 +8,9 @@ namespace TCODMaze {
 // --- Declare tile types
 tile_t TILES::FLOOR = {' ', {0xFF, 0xFF, 0xFF}};
 tile_t TILES::WALL = {'#', {0xF0, 0xF0, 0xF0}, true};
-tile_t TILES::START = {'S', {0xF0, 0xFF, 0xF0}};
+tile_t TILES::START = {'S', {0xFF, 0xF0, 0xF0}};
 tile_t TILES::FINISH = {'F', {0x0, 0xFF, 0x0}};
+tile_t TILES::VOID = {' ', {0x0, 0x0, 0x0}, true};
 
 // --- Constants
 const int maze::MIN_WIDTH = 1;
