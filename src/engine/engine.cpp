@@ -23,6 +23,10 @@ GameState Engine::update() {
     this->state = LOOP;
   }
 
+  if (this->state == LOOP) {
+    for (auto actr : this->active_scene->actors) actr->execute_action();
+  }
+
   return state;
 }
 
