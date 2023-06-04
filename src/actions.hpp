@@ -12,10 +12,9 @@ Action definitions for our game
 #include "engine/vector2i.hpp"
 
 class move_action : public TCODMaze::action {
- private:
-  TCODMaze::vector2i direction;
-
  public:
+  TCODMaze::vector2i direction;
+  move_action();
   move_action(const TCODMaze::vector2i&);
   void execute(TCODMaze::actor*);
 };

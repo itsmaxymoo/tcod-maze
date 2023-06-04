@@ -8,6 +8,9 @@ Custom actions implementation
 
 #include "engine/actor.hpp"
 #include "engine/scene.hpp"
+#include "engine/vector2i.hpp"
+
+move_action::move_action() { this->direction = TCODMaze::vector2i(0, 0); }
 
 move_action::move_action(const TCODMaze::vector2i& dir) {
   this->direction = dir;

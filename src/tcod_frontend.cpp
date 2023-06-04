@@ -13,6 +13,7 @@ TCOD Frontend Implementation
 #include <iostream>
 #include <libtcod.hpp>
 
+#include "actions.hpp"
 #include "engine/vector2i.hpp"
 
 #define WINDOW_SIZE 41
@@ -91,8 +92,31 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
+        // Window quit
         case SDL_QUIT:
           std::exit(EXIT_SUCCESS);
+          break;
+
+        // Regular keyboard keypresses
+        case SDL_KEYDOWN:
+          auto move_dir = std::make_shared<move_action>();
+          switch (event.key.keysym.sym) {
+            // move
+            case SDLK_UP:
+              move_dir->direction = TCODMaze::vector2i(0, -1);
+              break;
+            case SDLK_DOWN:
+              move_dir->direction = TCODMaze::vector2i(0, 1);
+              break;
+            case SDLK_LEFT:
+              move_dir->direction = TCODMaze::vector2i(-1, 0);
+              break;
+            case SDLK_RIGHT:
+              move_dir->direction = TCODMaze::vector2i(1, 0);
+              break;
+          }
+          // Execute move
+          engine->active_player->set_next_action(move_dir);
           break;
       }
     }
