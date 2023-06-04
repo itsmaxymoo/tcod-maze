@@ -62,6 +62,8 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
   // prestart
   tcod::print(g_console, {0, 0}, "Press [enter] to start...",
               (TCOD_ColorRGB){0xFF, 0xFF, 0xFF}, std::nullopt);
+  tcod::print(g_console, {0, 1}, "Use arrow keys to move.",
+              (TCOD_ColorRGB){0xFF, 0xFF, 0xFF}, std::nullopt);
   g_context.present(g_console);
   TCOD_console_wait_for_keypress(false);
 
