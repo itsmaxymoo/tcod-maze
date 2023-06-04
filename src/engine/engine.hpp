@@ -7,6 +7,7 @@ This class defines the main game loop.
 #ifndef TCOD_MAZE_ENGINE
 #define TCOD_MAZE_ENGINE
 
+#include <chrono>
 #include <memory>
 
 #include "actor.hpp"
@@ -21,6 +22,7 @@ class Engine {
   GameState state = SETUP;
   int mazeSize = 3;
   int maxMazeSize = 10;
+  std::chrono::steady_clock::time_point level_start_time;
 
  public:
   std::shared_ptr<scene> active_scene;
@@ -28,6 +30,8 @@ class Engine {
 
   int getMazeSize() const;
   void set_max_maze_size(int);
+  int get_max_time() const;
+  float get_remaining_time() const;
 
   GameState update();
 };

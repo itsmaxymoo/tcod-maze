@@ -17,7 +17,7 @@ TCOD Frontend Implementation
 #include "engine/vector2i.hpp"
 
 #define WINDOW_SIZE 41
-#define MAX_MAZE_SIZE WINDOW_SIZE - 10
+#define MAX_MAZE_SIZE WINDOW_SIZE - 30
 
 // --- TCOD Frontend
 
@@ -45,7 +45,7 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
   params.tcod_version = TCOD_COMPILEDVERSION;
   params.renderer_type = TCOD_RENDERER_SDL2;
   params.vsync = 1;
-  params.sdl_window_flags = SDL_WINDOW_RESIZABLE;
+  params.sdl_window_flags = 0b0;
   params.window_title = "TCOD Maze";
 
   auto tileset = tcod::load_tilesheet(get_data_dir() / "dejavu16x16_gs_tc.png",
@@ -61,13 +61,15 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
 
   // frame loop
   while (true) {
-    if (engine->update() == TCODMaze::GameState::SETUP) continue;
+    auto state = engine->update();
+
+    if (state == TCODMaze::GameState::SETUP) continue;
 
     // --- Rendering.
     g_console.clear();
 
     // Calculate centering offset
-    const int OFFSET = WINDOW_SIZE / 2 - engine->getMazeSize() / 2 + 1;
+    const int OFFSET = WINDOW_SIZE / 2 - engine->getMazeSize() / 2;
 
     // Render map
     for (int i = 0; i < engine->getMazeSize(); ++i) {
@@ -88,6 +90,26 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
                 {(engine->active_player->position.x + OFFSET),
                  (engine->active_player->position.y + OFFSET)},
                 "@", TCOD_ColorRGB{255, 255, 255}, std::nullopt);
+
+    // state specific display
+    switch (state) {
+      case TCODMaze::GameState::RUN:
+        tcod::print(
+            g_console, {0, 0},
+            "Remaining time: " + std::to_string(engine->get_remaining_time()),
+            (TCOD_ColorRGB){0xFF, 0xFF, 0xFF}, std::nullopt);
+        break;
+      case TCODMaze::GameState::WIN:
+        tcod::print(g_console, {0, WINDOW_SIZE - 1},
+                    "Congratulations, you made it to the end!",
+                    (TCOD_ColorRGB){0x30, 0xFF, 0x30}, std::nullopt);
+        break;
+      case TCODMaze::GameState::LOSE:
+        tcod::print(g_console, {0, WINDOW_SIZE - 1}, "Out of time. You lose!",
+                    (TCOD_ColorRGB){0xFF, 0x30, 0x30}, std::nullopt);
+      default:
+        break;
+    }
 
     // flush
     g_context.present(g_console);
