@@ -17,7 +17,7 @@ TCOD Frontend Implementation
 #include "engine/vector2i.hpp"
 
 #define WINDOW_SIZE 41
-#define MAX_MAZE_SIZE WINDOW_SIZE - 30
+#define MAX_MAZE_SIZE WINDOW_SIZE - 10
 
 // --- TCOD Frontend
 
@@ -58,6 +58,12 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
   g_context = tcod::Context(params);
 
   engine->set_max_maze_size(MAX_MAZE_SIZE);
+
+  // prestart
+  tcod::print(g_console, {0, 0}, "Press [enter] to start...",
+              (TCOD_ColorRGB){0xFF, 0xFF, 0xFF}, std::nullopt);
+  g_context.present(g_console);
+  TCOD_console_wait_for_keypress(false);
 
   // frame loop
   while (true) {
@@ -100,12 +106,15 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
             (TCOD_ColorRGB){0xFF, 0xFF, 0xFF}, std::nullopt);
         break;
       case TCODMaze::GameState::WIN:
-        tcod::print(g_console, {0, WINDOW_SIZE - 1},
+        tcod::print(g_console, {0, WINDOW_SIZE - 2},
                     "Congratulations, you made it to the end!",
+                    (TCOD_ColorRGB){0x30, 0xFF, 0x30}, std::nullopt);
+        tcod::print(g_console, {0, WINDOW_SIZE - 1}, "[esc] to quit",
                     (TCOD_ColorRGB){0x30, 0xFF, 0x30}, std::nullopt);
         break;
       case TCODMaze::GameState::LOSE:
-        tcod::print(g_console, {0, WINDOW_SIZE - 1}, "Out of time. You lose!",
+        tcod::print(g_console, {0, WINDOW_SIZE - 1},
+                    "Out of time. You lose! [esc]",
                     (TCOD_ColorRGB){0xFF, 0x30, 0x30}, std::nullopt);
       default:
         break;
@@ -139,6 +148,11 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
               break;
             case SDLK_RIGHT:
               move_dir->direction = TCODMaze::vector2i(1, 0);
+              break;
+
+            // exit
+            case SDLK_ESCAPE:
+              exit(0);
               break;
           }
           // Execute move
