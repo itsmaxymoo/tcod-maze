@@ -14,7 +14,7 @@ This class defines the main game loop.
 
 namespace TCODMaze {
 
-enum GameState { SETUP, LOOP, END };
+enum GameState { SETUP, RUN, WIN, LOSE };
 
 class Engine {
  private:
