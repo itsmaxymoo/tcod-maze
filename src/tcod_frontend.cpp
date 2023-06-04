@@ -17,6 +17,7 @@ TCOD Frontend Implementation
 #include "engine/vector2i.hpp"
 
 #define WINDOW_SIZE 41
+#define MAX_MAZE_SIZE WINDOW_SIZE - 10
 
 // --- TCOD Frontend
 
@@ -56,6 +57,9 @@ int TCODAsciiFrontEnd::run(TCODMaze::Engine *engine) {
 
   g_context = tcod::Context(params);
 
+  engine->set_max_maze_size(MAX_MAZE_SIZE);
+
+  // frame loop
   while (true) {
     if (engine->update() == TCODMaze::GameState::SETUP) continue;
 

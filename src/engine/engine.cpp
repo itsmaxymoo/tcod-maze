@@ -13,13 +13,19 @@ TCODMaze::Engine
 namespace TCODMaze {
 
 int Engine::getMazeSize() const { return this->mazeSize * 2 + 1; }
+void Engine::set_max_maze_size(int i) { this->maxMazeSize = i; }
 
 GameState Engine::update() {
   if (this->state == RUN) {
     if (this->active_player->position ==
         vector2i(this->getMazeSize() - 1, this->getMazeSize() - 2)) {
       ++(this->mazeSize);
-      this->state = SETUP;
+
+      if (this->getMazeSize() < this->maxMazeSize) {
+        this->state = SETUP;
+      } else {
+        this->state = WIN;
+      }
     }
 
     for (auto actr : this->active_scene->actors) actr->execute_action();
