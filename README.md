@@ -7,8 +7,9 @@ It is not meant to be that glamorous!
 ## How to Play
 
 1. Clone this repo
-2. run `./quickbuild.sh`
-3. then `./bin/tcod-maze`
+2. run `git submodule update --init --recursive`
+3. run `./quickbuild.sh`
+4. then `./bin/tcod-maze`
 
 Note: The executable must be able to find the `data/` directory!
 
